@@ -1,0 +1,13 @@
+Vou te explicar como é a organização de um projeto utilizando arquitetura hexagonal no meu projeto:
+- o projeto possui 3 pastas: primary, domain e secondary
+- na pasta primary ficam as logicas de entrada de dados como consumidores kafka e rest http
+- na pasta secondary ficam as logicas de saida como banco de dados, producao de mensagem para o kafka e salvar arquivos em storage do gcp
+- na pasta domain fica a principal regra de negocio da aplicação, nesta pasta tem apenas codigo puro, sem conhecer as libs externas utilizadas no projeto
+- libs externas são usadas apenas nas pastas primary (lib de rest http, kafka, etc) e na pasta secondary (orm, kafka, etc)
+- na pasta domain fica o contrato de comunicacao com essa camada:
+- dentro dela existe uma pasta port/primary onde ficam as interfaces que serão implementadas na pasta domain
+- tambem existe uma pasta port/secondary onde ficam as interfaces que a regra de negocio dentro da domain utilizam para acessar a camada secondary
+- na pasta (camada) primary as pastas internas são divididas por contexto (rest, kafka, etc)
+- na pasta (camada) seconcary as pastas internas são divididas por contexto (mysql, kafka, etc)
+- todo o projeto utiliza o conceito de inversão de dependencia
+gostaria que vc entendesse esse conceito

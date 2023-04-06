@@ -1,0 +1,30 @@
+- The app should use Python 3.10 and openai 0.27.0 and streamlit 1.21.0
+- You should avoid using dropdown menu, use tabs instead.
+- The app will display the generated image on the screen.
+- The app will handle errors and display error messages if image generation fails.
+- The app will be fully functional and responsive, allowing users to use it on any device or screen size.
+- You should generate a requirements.txt file at the root of the project
+- You should genereate a README.md file
+- The environment variables are saved in a `.env` file at the root of the project.
+- You should use these patterns when calling APIs:
+```
+# when using image API
+response = openai.Image.create(
+  prompt="prompt goes here",
+  n=1,
+  size="512x512"
+)
+image_url = response['data'][0]['url']
+```
+```
+# when using completion API
+response = openai.ChatCompletion.create(
+  model="gpt-3.5-turbo",
+  messages=[
+              {"role": "system", "content": "You are an insightful assistant."},
+              {"role": "user", "content": "Prompt goes here"},
+  temperature=0.7,
+  max_tokens=400
+)
+text = response["choices"][0]["message"]["content"]
+```
